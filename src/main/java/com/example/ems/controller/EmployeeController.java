@@ -39,12 +39,12 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<EmployeeDto> deleteEmployee(@PathVariable("id") Long employeeId) {
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") Long employeeId) {
         try {
         EmployeeDto employee = employeeService.deleteEmployee(employeeId);
-            return new ResponseEntity<>(employee, HttpStatus.OK);
+            return ResponseEntity.ok("Employee Deleted Successfully For EmployyeId : " + employeeId);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.ok("Fail To Delete Employee For EmployyeId : " + employeeId);
         }
     }
 
@@ -53,6 +53,16 @@ public class EmployeeController {
         try {
         List<EmployeeDto> employees = employeeService.getAllEmployees();
             return new ResponseEntity<>(employees, HttpStatus.OK);
+        } catch (Exception e) {
+            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+        }
+    }
+
+    @PutMapping("/{id}")
+    public ResponseEntity<EmployeeDto> updateEmployee(@PathVariable("id") Long employeeId, @RequestBody EmployeeDto updateEmployee) {
+        try {
+        EmployeeDto updatedEmployee = employeeService.updateEmployee(employeeId, updateEmployee);
+            return new ResponseEntity<>(updatedEmployee, HttpStatus.OK);
         } catch (Exception e) {
             return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
         }
