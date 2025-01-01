@@ -26,4 +26,5 @@ public interface EmployeeInterface {
     public EmployeeDto getEmployeeById(Long employeeId);
     public EmployeeDto deleteEmployee(Long employeeId);
     public List<EmployeeDto> getAllEmployees();
+    public EmployeeDto updateEmployee(Long employeeId, EmployeeDto employeeDto);
 }
