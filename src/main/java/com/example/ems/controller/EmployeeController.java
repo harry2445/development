@@ -39,12 +39,12 @@ public class EmployeeController {
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<EmployeeDto> deleteEmployee(@PathVariable("id") Long employeeId) {
+    public ResponseEntity<String> deleteEmployee(@PathVariable("id") Long employeeId) {
         try {
         EmployeeDto employee = employeeService.deleteEmployee(employeeId);
-            return new ResponseEntity<>(employee, HttpStatus.OK);
+            return ResponseEntity.ok("Employee Deleted Successfully For EmployyeId : " + employeeId);
         } catch (Exception e) {
-            return new ResponseEntity<>(null, HttpStatus.INTERNAL_SERVER_ERROR);
+            return ResponseEntity.ok("Fail To Delete Employee For EmployyeId : " + employeeId);
         }
     }
 
